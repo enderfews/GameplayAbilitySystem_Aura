@@ -5,7 +5,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Player/AuraPlayerState.h"
 #include "AbilitySystemComponent.h"
-
+#include "GameFramework/Controller.h"
 
 AAuraCharacter::AAuraCharacter()
 {
@@ -20,9 +20,9 @@ AAuraCharacter::AAuraCharacter()
 	bUseControllerRotationYaw = false;
 }
 
-void AAuraCharacter::PossessedBy(AController* Controller)
+void AAuraCharacter::PossessedBy(AController* controllerOwner)
 {
-	Super::PossessedBy(Controller);
+	Super::PossessedBy(controllerOwner);
 	//Init ability info for the server
 	InitAbilityActorInfo();
 }
