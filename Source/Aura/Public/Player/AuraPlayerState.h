@@ -3,20 +3,20 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Character.h"
+#include "GameFramework/PlayerState.h"
 #include "AbilitySystemInterface.h"
-#include "AuraCharacterBase.generated.h"
+#include "AuraPlayerState.generated.h"
 
 class UAttributeSet;
 class UAbilitySystemComponent;
 
-UCLASS(Abstract)
-class AURA_API AAuraCharacterBase : public ACharacter , public IAbilitySystemInterface
+UCLASS()
+class AURA_API AAuraPlayerState : public APlayerState , public IAbilitySystemInterface
 {
 	GENERATED_BODY()
-
+	
 public:
-	AAuraCharacterBase();
+	AAuraPlayerState();
 
 #pragma region IAbilitySystemInterface
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
@@ -25,11 +25,6 @@ public:
 	UAttributeSet* GetAttributeSet() const;
 
 protected:
-	virtual void BeginPlay() override;
-
-	UPROPERTY(EditAnywhere, Category = "Combat")
-	TObjectPtr<USkeletalMeshComponent> Weapon;
-
 	UPROPERTY()
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 

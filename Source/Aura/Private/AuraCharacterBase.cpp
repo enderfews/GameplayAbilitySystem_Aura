@@ -2,6 +2,10 @@
 
 
 #include "AuraCharacterBase.h"
+#include "AbilitySystemComponent.h"
+#include "AttributeSet.h"
+#include "Aura/Public/AbilitySystem/AuraAbilitySystemComponent.h"
+#include "Aura/Public/AbilitySystem/AuraAttributeSet.h"
 
 AAuraCharacterBase::AAuraCharacterBase()
 {
@@ -12,6 +16,16 @@ AAuraCharacterBase::AAuraCharacterBase()
 	Weapon->SetupAttachment(GetMesh(), FName("WeaponHandSocket"));
 	Weapon->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
+}
+
+UAbilitySystemComponent* AAuraCharacterBase::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+}
+
+UAttributeSet* AAuraCharacterBase::GetAttributeSet() const
+{
+	return AttributeSet;
 }
 
 void AAuraCharacterBase::BeginPlay()
