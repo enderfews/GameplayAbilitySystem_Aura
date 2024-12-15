@@ -16,6 +16,10 @@ class AURA_API AAuraCharacter : public AAuraCharacterBase
 public:
 	AAuraCharacter();
 
+#pragma region ICombatInterface
+	virtual int32 GetLevel() const override;
+#pragma endregion
+
 	virtual void PossessedBy(AController* controllerOwner) override;
 	virtual void OnRep_PlayerState() override;
 
