@@ -8,6 +8,7 @@
 
 class UAuraUserWidget;
 class UOverlayWidgetController;
+class UAttributeMenuWidgetController;
 class UAbilitySystemComponent;
 class UAttributeSet;
 struct FWidgetControllerParams;
@@ -25,6 +26,8 @@ public:
 	TObjectPtr<UAuraUserWidget> OverlayWidget;
 
 	UOverlayWidgetController* GetOverlayWidgetController(const FWidgetControllerParams& Params);
+	UAttributeMenuWidgetController* GeAttributeMenuWidgetController(const FWidgetControllerParams& Params);
+
 
 	void InitOverlay(APlayerController* pc, APlayerState* ps, UAbilitySystemComponent* asc, UAttributeSet* as);
 protected:
@@ -38,5 +41,10 @@ private:
 	TSubclassOf<UOverlayWidgetController> OverlayWidgetControllerClass;
 
 	TObjectPtr<UOverlayWidgetController> OverlayWidgetController;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UAttributeMenuWidgetController>AttributeMenuWidgetControllerClass;
+
+	TObjectPtr<UAttributeMenuWidgetController> AttributeMenuWidgetController;
 	
 };
