@@ -13,7 +13,8 @@
 				"GameplayAbilities",
 				"UMG",
 				"CoreUObject",
-				"GameplayStateTreeModule"
+				"GameplayStateTreeModule",
+				"EnhancedInput"
 			]
 		}
 	],
