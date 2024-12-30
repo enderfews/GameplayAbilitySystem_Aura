@@ -38,6 +38,21 @@ void AAuraCharacterBase::InitAbilityActorInfo()
 	
 }
 
+FVector AAuraCharacterBase::GetCombatSocketLocation()
+{
+	if (!IsValid(Weapon))
+	{
+		return GetPawnViewLocation();
+	}
+
+	if (!Weapon->DoesSocketExist(WeaponTipSocketName))
+	{
+		return GetPawnViewLocation();
+	}
+
+	return Weapon->GetSocketLocation(WeaponTipSocketName);
+}
+
 void AAuraCharacterBase::ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level) const
 {
 	check(IsValid(GetAbilitySystemComponent()));
