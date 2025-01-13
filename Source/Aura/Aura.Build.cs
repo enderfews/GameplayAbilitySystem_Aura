@@ -22,6 +22,7 @@ public class Aura : ModuleRules
 			"AIModule",
 			"GameplayStateTreeModule",
 			"StateTreeModule",
+			"Niagara",
 			"NavigationSystem"});
 
 		// Uncomment if you are using Slate UI
