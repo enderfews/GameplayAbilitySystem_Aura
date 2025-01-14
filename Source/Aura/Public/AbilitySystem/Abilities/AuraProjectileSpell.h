@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "AbilitySystem/Abilities/AuraGameplayAbility.h"
+#include "GameplayEffectTypes.h"
 #include "AuraProjectileSpell.generated.h"
 
 class AAuraProjectile;
-
+class UGameplayEffect;
 /**
  * 
  */
@@ -18,6 +19,8 @@ class AURA_API UAuraProjectileSpell : public UAuraGameplayAbility
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<AAuraProjectile> ProjectileClass;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TSubclassOf<UGameplayEffect> DamageEffectClass;
 
 	UFUNCTION(BlueprintCallable, Category = "Projectile")
 	void SpawnProjectile(const FVector& ProjectileTargetLocation);
