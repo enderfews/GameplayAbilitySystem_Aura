@@ -3,6 +3,8 @@
 
 #include "AbilitySystem/Data/CharacterClassInfo.h"
 #include "GameplayEffectTypes.h"
+#include "Abilities/GameplayAbility.h"
+
 
 FCharactertClassDefaultInfo UCharacterClassInfo::GetClassDefaultInfo(ECharacterClass CharacterClass)
 {

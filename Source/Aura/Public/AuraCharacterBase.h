@@ -42,6 +42,7 @@ protected:
 
 #pragma region ICombatInterface
 	virtual FVector GetCombatSocketLocation() override;
+	virtual UAnimMontage* GetHitReactMontage_Implementation() const override;
 #pragma endregion
 
 	UPROPERTY()
@@ -66,4 +67,6 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Abilities")
 	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	TObjectPtr<UAnimMontage> HitReactionMontage;
 };

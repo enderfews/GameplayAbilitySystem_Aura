@@ -54,6 +54,12 @@ public:
 
 #pragma endregion
 
+#pragma region EffectsTags
+
+	FGameplayTag Effects_HitReact;
+
+#pragma endregion
+
 protected:
 
 private:
