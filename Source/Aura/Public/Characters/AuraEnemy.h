@@ -31,6 +31,7 @@ public:
 
 #pragma region ICombatInterface
 	virtual int32 GetLevel() const override;
+	virtual void Die() override;
 #pragma endregion
 
 	UPROPERTY(BlueprintAssignable)
@@ -44,6 +45,8 @@ public:
 	bool bHitReacting = false;
 	UPROPERTY(BlueprintReadOnly, Category = "Combat")
 	float BaseWalkSpeed = 250.f;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combat")
+	float LifeSpan = 5.f;
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character Class Defaults")
