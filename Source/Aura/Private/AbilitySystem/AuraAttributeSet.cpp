@@ -8,7 +8,8 @@
 #include "AbilitySystemBlueprintLibrary.h"
 #include "AuraGameplayTags.h"
 #include "Interaction/CombatInterface.h"
-
+#include "Kismet/GameplayStatics.h"
+#include "Player/AuraPlayerController.h"
 
 UAuraAttributeSet::UAuraAttributeSet()
 {
@@ -123,6 +124,7 @@ void UAuraAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallba
 					CombatInterface->Die();
 				}
 			}
+			ShowFloatingText(Props, LocalIncomingDamage);
 		}
 	}
 }
@@ -270,5 +272,16 @@ void UAuraAttributeSet::SetEffectProperties(const FGameplayEffectModCallbackData
 	if (IsValid(TargetASC))
 	{
 		Props.Target.ASC = TargetASC;
+	}
+}
+
+void UAuraAttributeSet::ShowFloatingText(const FEffectProperties& Props, float Damage) const
+{
+	if (Props.Source.Character != Props.Target.Character)
+	{
+		if (AAuraPlayerController* PC = Cast<AAuraPlayerController>(UGameplayStatics::GetPlayerController(Props.Source.Character, 0)))
+		{
+			PC->ShowDamageNumber(Damage, Props.Target.Character);
+		}
 	}
 }

@@ -14,6 +14,7 @@ class UAuraInputConfigDataAsset;
 class IEnemyInterface;
 class UAuraAbilitySystemComponent;
 class USplineComponent;
+class UDamageTextComponent;
 /**
  * 
  */
@@ -26,6 +27,8 @@ public:
 	AAuraPlayerController();
 
 	virtual void PlayerTick(float DeltaTime) override;
+	UFUNCTION(Client, Reliable)
+	void ShowDamageNumber(float DamageAmount, ACharacter* TargetCharacter);
 
 protected:
 
@@ -41,6 +44,9 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Input")
 	TObjectPtr<UInputAction> ShiftAction;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UDamageTextComponent> DamageTextComponentClass;
 
 	void ShiftPressed();
 	void ShiftReleased();
