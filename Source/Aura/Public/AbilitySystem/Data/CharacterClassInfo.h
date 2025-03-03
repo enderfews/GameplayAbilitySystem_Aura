@@ -13,9 +13,9 @@ class UGameplayAbility;
 UENUM(BlueprintType)
 enum class ECharacterClass : uint8
 {
-	Elementalist,
-	Warrior,
-	Ranger
+	Elementalist = 0,
+	Warrior = 1,
+	Ranger = 2
 };
 
 USTRUCT(BlueprintType)

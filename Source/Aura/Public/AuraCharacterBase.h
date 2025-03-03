@@ -43,6 +43,7 @@ protected:
 #pragma region ICombatInterface
 	virtual FVector GetCombatSocketLocation() override;
 	virtual UAnimMontage* GetHitReactMontage_Implementation() const override;
+	virtual ECharacterClass GetCharacterClass_Implementation() const override;
 	virtual void Die() override;
 #pragma endregion
 

@@ -12,9 +12,7 @@
 class UWidgetComponent;
 class UBehaviorTree;
 class AAuraAIController;
-/**
- * 
- */
+
 UCLASS()
 class AURA_API AAuraEnemy
 	: public AAuraCharacterBase
@@ -34,6 +32,7 @@ public:
 #pragma region ICombatInterface
 	virtual int32 GetLevel() const override;
 	virtual void Die() override;
+	virtual ECharacterClass GetCharacterClass_Implementation() const override;
 #pragma endregion
 
 	UPROPERTY(BlueprintAssignable)

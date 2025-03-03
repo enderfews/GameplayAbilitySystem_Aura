@@ -22,9 +22,14 @@ public:
 	AAuraAIController();
 
 protected:
+
+	virtual void OnPossess(APawn* InPawn) override;
+
 	UPROPERTY()
 	TObjectPtr<UBlackboardComponent> BlackboardComponent;
 	UPROPERTY()
 	TObjectPtr<UBehaviorTreeComponent> BehaviorTreeComponent;
 
+	UFUNCTION()
+	void OnHitReactChanged(const FGameplayTag CallbackTag, int32 NewCount);
 };

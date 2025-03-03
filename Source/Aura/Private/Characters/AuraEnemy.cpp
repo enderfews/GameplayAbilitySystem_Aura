@@ -24,6 +24,11 @@ AAuraEnemy::AAuraEnemy()
 
 	HealthBar = CreateDefaultSubobject<UWidgetComponent>(TEXT("Health bar"));
 	HealthBar->SetupAttachment(GetRootComponent());
+
+	bUseControllerRotationPitch = false;
+	bUseControllerRotationRoll = false;
+	bUseControllerRotationYaw = false;
+	GetCharacterMovement()->bUseControllerDesiredRotation = true;
 }
 
 void AAuraEnemy::PossessedBy(AController* NewController)
@@ -64,6 +69,11 @@ void AAuraEnemy::Die()
 {
 	SetLifeSpan(LifeSpan);
 	Super::Die();
+}
+
+ECharacterClass AAuraEnemy::GetCharacterClass_Implementation() const
+{
+	return CharacterClass;
 }
 
 void AAuraEnemy::BeginPlay()
