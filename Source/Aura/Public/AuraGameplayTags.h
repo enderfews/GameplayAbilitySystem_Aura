@@ -60,6 +60,11 @@ public:
 
 #pragma endregion
 
+#pragma region Attacks
+
+	FGameplayTag Abilities_Attack;
+
+#pragma endregion
 protected:
 
 private:

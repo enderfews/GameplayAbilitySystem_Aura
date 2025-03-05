@@ -34,4 +34,6 @@ void FAuraGameplayTags::InitializeGameplayTags()
 	GameplayTags.Damage = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage"), FString("Tag for damage gameplay effect and others"));
 
 	GameplayTags.Effects_HitReact = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Effects.HitReact"), FString("Tag for hit reaction effects (Such as receiving a firebolt or weapon hit)"));
+
+	GameplayTags.Abilities_Attack = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Abilities.Attack"), FString("Tag to trigger different kinds of aura character attacks"));
 }

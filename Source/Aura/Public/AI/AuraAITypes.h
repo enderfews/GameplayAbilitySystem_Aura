@@ -10,4 +10,5 @@ namespace FBlackboard
 	const FName KeyDistanceToTarget = TEXT("DistanceToTarget");
 	const FName KeyHitReacting = TEXT("HitReacting");
 	const FName KeyCharacterRole = TEXT("CharacterRole");
+	const FName KeyLocationToGo = TEXT("LocationToGo");
 }

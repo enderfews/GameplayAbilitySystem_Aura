@@ -9,6 +9,7 @@
 #include "Game/AuraGameModeBase.h"
 #include "UI/HUD/AuraHUD.h"
 #include "AbilitySystemComponent.h"
+#include "Interaction/CombatInterface.h"
 
 
 UOverlayWidgetController* UAuraAbilitySystemLibrary::GetOverlayWidgetController(const UObject* WorldContextObject)
@@ -104,10 +105,30 @@ void UAuraAbilitySystemLibrary::GiveStartupAbilities(const UObject* WorldContext
 	{
 		return;
 	}
+
 	UCharacterClassInfo* CharacterClassInfo = AuraGameMode->CharacterClassInfo;
+	if (!IsValid(CharacterClassInfo))
+	{
+		return;
+	}
+
 	for (TSubclassOf<UGameplayAbility> AbilityClass : CharacterClassInfo->CommonAbilities)
 	{
 		FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(AbilityClass, 1);
+		ASC->GiveAbility(AbilitySpec);
+	}
+
+	if (!ASC->GetAvatarActor()->Implements<UCombatInterface>())
+	{
+		return;
+	}
+
+	const ECharacterClass CharacterClass = ICombatInterface::Execute_GetCharacterClass(ASC->GetAvatarActor());
+	const int32 CharacterLevel = Cast<ICombatInterface>(ASC->GetAvatarActor())->GetLevel();
+	const TArray<TSubclassOf<UGameplayAbility>>& AbilityClasses = CharacterClassInfo->CharacterClassInformation[CharacterClass].StartupAbilities;
+	for (TSubclassOf<UGameplayAbility> AbilityClass : AbilityClasses)
+	{
+		FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(AbilityClass, CharacterLevel);
 		ASC->GiveAbility(AbilitySpec);
 	}
 }
