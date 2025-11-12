@@ -19,6 +19,21 @@ AAuraAIController::AAuraAIController()
 
 }
 
+AActor* AAuraAIController::GetCombatTarget_Implementation() const
+{
+	return Cast<AActor>(BlackboardComponent->GetValueAsObject(FBlackboard::KeyTargetToFollow));
+}
+
+FVector AAuraAIController::GetCombatTargetLocation_Implementation() const
+{
+	AActor* const Target = ICombatTargeting::Execute_GetCombatTarget(this);
+	if (IsValid(Target))
+	{
+		return Target->GetActorLocation();
+	}
+	return FAISystem::InvalidLocation;
+}
+
 void AAuraAIController::OnPossess(APawn* InPawn)
 {
 	Super::OnPossess(InPawn);

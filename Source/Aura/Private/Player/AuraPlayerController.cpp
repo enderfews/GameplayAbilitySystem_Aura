@@ -31,6 +31,20 @@ void AAuraPlayerController::PlayerTick(float DeltaTime)
 	AutoRun();
 }
 
+AActor* AAuraPlayerController::GetCombatTarget_Implementation() const
+{
+	return TargetingActor;
+}
+
+FVector AAuraPlayerController::GetCombatTargetLocation_Implementation() const
+{
+	if (IsValid(TargetingActor))
+	{
+		return TargetingActor->GetActorLocation();
+	}
+	return TargetingLocation;
+}
+
 void AAuraPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
@@ -110,6 +124,8 @@ void AAuraPlayerController::CursorTrace()
 		return;
 	}
 
+	TargetingLocation = CursorHit.Location;
+	TargetingActor = CursorHit.GetActor();
 	LastActor = ThisActor;
 	ThisActor = CursorHit.GetActor();
 

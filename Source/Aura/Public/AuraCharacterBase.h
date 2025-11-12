@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "AbilitySystemInterface.h"
+#include "Interaction/CombatTargeting.h"
 #include "Interaction/CombatInterface.h"
 #include "AuraCharacterBase.generated.h"
 
@@ -18,11 +19,19 @@ class AURA_API AAuraCharacterBase
 	: public ACharacter
 	, public IAbilitySystemInterface
 	, public ICombatInterface
+	, public ICombatTargeting
 {
 	GENERATED_BODY()
 
 public:
 	AAuraCharacterBase();
+
+#pragma region ICombatTargeting
+
+	virtual AActor* GetCombatTarget_Implementation() const override;
+	virtual FVector GetCombatTargetLocation_Implementation() const override;
+
+#pragma endregion
 
 #pragma region IAbilitySystemInterface
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;

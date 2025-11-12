@@ -22,6 +22,27 @@ AAuraCharacterBase::AAuraCharacterBase()
 
 }
 
+AActor* AAuraCharacterBase::GetCombatTarget_Implementation() const
+{
+	AController* const MyController = GetController();
+	if (IsValid(MyController) && MyController->Implements<UCombatTargeting>())
+	{
+		return ICombatTargeting::Execute_GetCombatTarget(MyController);
+	}
+
+	return nullptr;
+}
+
+FVector AAuraCharacterBase::GetCombatTargetLocation_Implementation() const
+{
+	AController* const MyController = GetController();
+	if (IsValid(MyController) && MyController->Implements<UCombatTargeting>())
+	{
+		return ICombatTargeting::Execute_GetCombatTargetLocation(MyController);
+	}
+	return FVector::ZeroVector;
+}
+
 UAbilitySystemComponent* AAuraCharacterBase::GetAbilitySystemComponent() const
 {
 	return AbilitySystemComponent;

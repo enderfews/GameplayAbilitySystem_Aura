@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "GameplayTagContainer.h"
+#include "Interaction/CombatTargeting.h"
 #include "AuraPlayerController.generated.h"
 
 class UInputMappingContext;
@@ -19,7 +20,9 @@ class UDamageTextComponent;
  * 
  */
 UCLASS()
-class AURA_API AAuraPlayerController : public APlayerController
+class AURA_API AAuraPlayerController
+	: public APlayerController
+	, public ICombatTargeting
 {
 	GENERATED_BODY()
 	
@@ -29,6 +32,13 @@ public:
 	virtual void PlayerTick(float DeltaTime) override;
 	UFUNCTION(Client, Reliable)
 	void ShowDamageNumber(float DamageAmount, ACharacter* TargetCharacter);
+
+#pragma region ICombatTargeting
+
+	virtual AActor* GetCombatTarget_Implementation() const override;
+	virtual FVector GetCombatTargetLocation_Implementation() const override;
+
+#pragma endregion
 
 protected:
 
@@ -77,6 +87,8 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USplineComponent> Spline;
 	FVector CachedDestination = FVector::ZeroVector;
+	FVector TargetingLocation = FVector::ZeroVector;
+	AActor* TargetingActor = nullptr;
 	float FollowTime = 0.f;
 	float ShortPressThreshold = 0.5f;
 	UPROPERTY(EditDefaultsOnly)

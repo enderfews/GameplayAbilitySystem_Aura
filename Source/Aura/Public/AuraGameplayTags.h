@@ -63,6 +63,8 @@ public:
 #pragma region Attacks
 
 	FGameplayTag Abilities_Attack;
+	FGameplayTag Abilities_Attack_Melee;
+	FGameplayTag Abilities_Attack_Ranged;
 
 #pragma endregion
 protected:

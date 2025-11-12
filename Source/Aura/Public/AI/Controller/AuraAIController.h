@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
+#include "Interaction/CombatTargeting.h"
 #include "AuraAIController.generated.h"
 
 
@@ -13,13 +14,22 @@ class UBehaviorTreeComponent;
  * 
  */
 UCLASS()
-class AURA_API AAuraAIController : public AAIController
+class AURA_API AAuraAIController
+	: public AAIController
+	, public ICombatTargeting
 {
 	GENERATED_BODY()
 	
 public:
 
 	AAuraAIController();
+
+#pragma region ICombatTargeting
+
+	virtual AActor* GetCombatTarget_Implementation() const override;
+	virtual FVector GetCombatTargetLocation_Implementation() const override;
+
+#pragma endregion
 
 protected:
 
