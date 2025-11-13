@@ -15,7 +15,8 @@
 				"CoreUObject",
 				"GameplayStateTreeModule",
 				"EnhancedInput",
-				"AIModule"
+				"AIModule",
+				"DeveloperSettings"
 			]
 		}
 	],
@@ -53,6 +54,10 @@
 		},
 		{
 			"Name": "OnlineServicesEOS",
+			"Enabled": true
+		},
+		{
+			"Name": "Flow",
 			"Enabled": true
 		}
 	]

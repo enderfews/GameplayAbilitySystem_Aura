@@ -11,19 +11,19 @@
 
 void UAuraProjectileSpell::SpawnProjectile(const FVector& ProjectileTargetLocation)
 {
-	const bool bIsServer = GetAvatarActorFromActorInfo()->HasAuthority();
+	AActor* const AvatarActor = GetAvatarActorFromActorInfo();
+	const bool bIsServer = AvatarActor->HasAuthority();
 	if (!bIsServer)
 	{
 		return;
 	}
 
-	ICombatInterface* CombatInterface = Cast<ICombatInterface>(GetAvatarActorFromActorInfo());
-	if (!CombatInterface)
+	if (!AvatarActor->Implements<UCombatInterface>())
 	{
 		return;
 	}
 
-	const FVector SocketLocation = CombatInterface->GetCombatSocketLocation();
+	const FVector SocketLocation = ICombatInterface::Execute_GetCombatSocketLocation(AvatarActor);
 	FRotator ProjectileOrientation = (ProjectileTargetLocation - SocketLocation).Rotation();
 	ProjectileOrientation.Pitch = 0.f;
 
@@ -37,7 +37,7 @@ void UAuraProjectileSpell::SpawnProjectile(const FVector& ProjectileTargetLocati
 		, Cast<APawn>(GetOwningActorFromActorInfo())
 		, ESpawnActorCollisionHandlingMethod::AlwaysSpawn);
 
-	const UAbilitySystemComponent* const SourceASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetAvatarActorFromActorInfo());
+	const UAbilitySystemComponent* const SourceASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(AvatarActor);
 	const FGameplayEffectSpecHandle SpecHandle = SourceASC->MakeOutgoingSpec(DamageEffectClass, GetAbilityLevel(), SourceASC->MakeEffectContext());
 	const FAuraGameplayTags& GameplayTags = FAuraGameplayTags::Get();
 	UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(SpecHandle, GameplayTags.Damage, Damage.GetValueAtLevel(GetAbilityLevel()));

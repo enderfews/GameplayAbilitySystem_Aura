@@ -7,6 +7,8 @@
 #include "AbilitySystemInterface.h"
 #include "Interaction/CombatTargeting.h"
 #include "Interaction/CombatInterface.h"
+#include "Identity/Interfaces/IdentityTagAssetInterface.h"
+#include "GameplayTagContainer.h"
 #include "AuraCharacterBase.generated.h"
 
 class UAttributeSet;
@@ -20,6 +22,7 @@ class AURA_API AAuraCharacterBase
 	, public IAbilitySystemInterface
 	, public ICombatInterface
 	, public ICombatTargeting
+	, public IIdentityTagAssetInterface
 {
 	GENERATED_BODY()
 
@@ -49,11 +52,22 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	FName WeaponTipSocketName;
 
+	UPROPERTY(EditAnywhere, Category = "Identity")
+	FGameplayTag CharacterTag;
+	UPROPERTY(EditAnywhere, Category = "Identity")
+	FGameplayTag IdentityTag;
+
 #pragma region ICombatInterface
-	virtual FVector GetCombatSocketLocation() override;
+	virtual FVector GetCombatSocketLocation_Implementation() override;
 	virtual UAnimMontage* GetHitReactMontage_Implementation() const override;
 	virtual ECharacterClass GetCharacterClass_Implementation() const override;
 	virtual void Die() override;
+#pragma endregion
+
+#pragma region IIdentityTagAssetInterface
+
+	virtual void GetCharacterTag_Implementation(FGameplayTag& OutCharacterTag) override;
+	virtual void GetIdentityTag_Implementation(FGameplayTag& OutIdentityTag) override;
 #pragma endregion
 
 	UFUNCTION(NetMulticast, Reliable)

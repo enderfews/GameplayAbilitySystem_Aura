@@ -63,7 +63,7 @@ void AAuraCharacterBase::InitAbilityActorInfo()
 	
 }
 
-FVector AAuraCharacterBase::GetCombatSocketLocation()
+FVector AAuraCharacterBase::GetCombatSocketLocation_Implementation()
 {
 	if (!IsValid(Weapon))
 	{
@@ -92,6 +92,16 @@ void AAuraCharacterBase::Die()
 {
 	Weapon->DetachFromComponent(FDetachmentTransformRules(EDetachmentRule::KeepWorld, true));
 	MulticastHandleDeath();
+}
+
+void AAuraCharacterBase::GetCharacterTag_Implementation(FGameplayTag& OutCharacterTag)
+{
+	OutCharacterTag = CharacterTag;
+}
+
+void AAuraCharacterBase::GetIdentityTag_Implementation(FGameplayTag& OutIdentityTag)
+{
+	OutIdentityTag = IdentityTag;
 }
 
 void AAuraCharacterBase::MulticastHandleDeath_Implementation()
